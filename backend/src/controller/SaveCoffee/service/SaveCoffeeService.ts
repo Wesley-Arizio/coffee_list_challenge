@@ -12,8 +12,9 @@ export class SaveCoffeeService {
     this.repository = new SaveCoffeeRepository(db);
   }
 
-  execute({ name, description }: SaveCoffeeControllerArgs) {
-    console.log(name, description);
-    return true;
+  async execute({ name, description }: SaveCoffeeControllerArgs) {
+    const coffee = await this.repository.save({ name, description });
+
+    return coffee;
   }
 }
