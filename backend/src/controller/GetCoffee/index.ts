@@ -24,7 +24,7 @@ export async function GetCoffeeController(
       return response.status(status).send({ error });
     }
 
-    return response.status(200).send({ data });
+    return response.status(status).send({ data });
   } catch (e) {
     console.error(`Error on getting specific coffee ${e.message}`);
     return response.status(500).send({ error: "Something went wrong" });

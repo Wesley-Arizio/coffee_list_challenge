@@ -1,4 +1,8 @@
 import { Knex } from "knex";
+import {
+  WrapperServiceResponse,
+  wrapperServiceResponse,
+} from "../../../util/serviceWrapperResponse";
 import { CoffeeRepository } from "../../repository/CoffeeRepository/CoffeeRepository";
 
 export interface SaveCoffeeControllerArgs {
@@ -12,9 +16,20 @@ export class SaveCoffeeService {
     this.repository = new CoffeeRepository(db);
   }
 
-  async execute({ name, description }: SaveCoffeeControllerArgs) {
+  async execute({
+    name,
+    description,
+  }: SaveCoffeeControllerArgs): Promise<WrapperServiceResponse> {
     const coffee = await this.repository.save({ name, description });
 
-    return coffee;
+    if (!coffee) {
+      return wrapperServiceResponse({
+        status: 500,
+        error: "Could not save your coffee",
+        data: null,
+      });
+    }
+
+    return wrapperServiceResponse({ status: 200, data: coffee });
   }
 }

@@ -1,5 +1,8 @@
 import { Knex } from "knex";
-import { Coffee } from "../../../Entity/coffee";
+import {
+  WrapperServiceResponse,
+  wrapperServiceResponse,
+} from "../../../util/serviceWrapperResponse";
 import { CoffeeRepository } from "../../repository/CoffeeRepository/CoffeeRepository";
 
 export class GetCoffeeListService {
@@ -8,9 +11,12 @@ export class GetCoffeeListService {
     this.repository = new CoffeeRepository(db);
   }
 
-  async execute(): Promise<Coffee> {
-    const coffee = await this.repository.getAll();
+  async execute(): Promise<WrapperServiceResponse> {
+    const allCoffees = await this.repository.getAll();
 
-    return coffee;
+    return wrapperServiceResponse({
+      status: 200,
+      data: allCoffees,
+    });
   }
 }
