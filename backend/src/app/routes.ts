@@ -1,5 +1,6 @@
 import { Router } from "express";
 import { Knex } from "knex";
+import { GetCoffeeController } from "../controller/GetCoffee";
 import { GetCoffeeListController } from "../controller/GetCoffeeList";
 import { SaveCoffeeController } from "../controller/SaveCoffee";
 
@@ -20,7 +21,7 @@ export class Routes {
     );
 
     this.routes.get("/coffee/:id", (request, response) =>
-      response.status(200).send()
+      GetCoffeeController(request, response, this.db)
     );
 
     this.routes.get("/coffee", (request, response) =>
