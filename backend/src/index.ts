@@ -1,8 +1,5 @@
-const sum = (a: number, b: number): number => {
-  return a + b;
-};
+import App from "./app/app";
 
-{
-  const result = sum(1, 5);
-  console.log(result);
-}
+const app = new App();
+
+app.init();
