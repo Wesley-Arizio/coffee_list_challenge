@@ -1,10 +1,11 @@
 import { Router } from "express";
+import { Knex } from "knex";
 
 export class Routes {
-  private db: string;
+  private db: Knex;
   public routes: Router;
 
-  constructor(dbInstance: string) {
+  constructor(dbInstance: Knex) {
     this.db = dbInstance;
     this.routes = Router();
 
@@ -12,8 +13,9 @@ export class Routes {
   }
 
   private setRoutes() {
-    this.routes.get("/", (request, response) => {
-      response.send({ bele: this.db });
+    this.routes.get("/", async (request, response) => {
+      const results = await this.db("coffee").select("*");
+      return response.send({ bele: results });
     });
   }
 }
