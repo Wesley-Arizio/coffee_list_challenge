@@ -1,5 +1,6 @@
 import { Router } from "express";
 import { Knex } from "knex";
+import { SaveCoffeeController } from "../controller/SaveCoffee";
 
 export class Routes {
   private db: Knex;
@@ -13,9 +14,24 @@ export class Routes {
   }
 
   private setRoutes() {
-    this.routes.get("/", async (request, response) => {
-      const results = await this.db("coffee").select("*");
-      return response.send({ bele: results });
-    });
+    this.routes.post("/coffee", (request, response) =>
+      SaveCoffeeController(request, response, this.db)
+    );
+
+    this.routes.get("/coffee/:id", (request, response) =>
+      response.status(200).send()
+    );
+
+    this.routes.get("/coffee", (request, response) =>
+      response.status(200).send()
+    );
+
+    this.routes.patch("/coffee/:id", (request, response) =>
+      response.status(200).send()
+    );
+
+    this.routes.delete("/coffee/:id", (request, response) =>
+      response.status(200).send()
+    );
   }
 }
