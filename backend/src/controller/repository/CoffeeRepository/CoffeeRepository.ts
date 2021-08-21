@@ -2,7 +2,7 @@ import { Knex } from "knex";
 import { Coffee } from "../../../Entity/coffee";
 import { SaveCoffeeControllerArgs } from "../../SaveCoffee/service/SaveCoffeeService";
 
-export class SaveCoffeeRepository {
+export class CoffeeRepository {
   private db: Knex.QueryBuilder<Coffee>;
 
   constructor(db: Knex) {
@@ -15,5 +15,11 @@ export class SaveCoffeeRepository {
       .returning("*");
 
     return response;
+  }
+
+  async getAll(): Promise<Coffee> {
+    const coffees = await this.db.select("*");
+
+    return coffees;
   }
 }

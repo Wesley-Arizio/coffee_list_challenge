@@ -1,5 +1,5 @@
 import { Knex } from "knex";
-import { SaveCoffeeRepository } from "../../repository/CoffeeRepository/CoffeeRepository";
+import { CoffeeRepository } from "../../repository/CoffeeRepository/CoffeeRepository";
 
 export interface SaveCoffeeControllerArgs {
   name: string;
@@ -7,9 +7,9 @@ export interface SaveCoffeeControllerArgs {
 }
 
 export class SaveCoffeeService {
-  private repository: SaveCoffeeRepository;
+  private repository: CoffeeRepository;
   constructor(db: Knex) {
-    this.repository = new SaveCoffeeRepository(db);
+    this.repository = new CoffeeRepository(db);
   }
 
   async execute({ name, description }: SaveCoffeeControllerArgs) {
