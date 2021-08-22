@@ -1,5 +1,4 @@
 import { Knex } from "knex";
-import { Coffee } from "../../../Entity/coffee";
 import {
   wrapperServiceResponse,
   WrapperServiceResponse,
