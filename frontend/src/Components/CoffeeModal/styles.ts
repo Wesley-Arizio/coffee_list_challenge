@@ -80,3 +80,22 @@ export const BoardDescription = styled.main`
   color: #000;
   transition: 0.4s;
 `;
+
+export const Footer = styled.footer`
+  flex: 1;
+
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+
+  margin-top: 50px;
+
+  span {
+    margin: 0 10px;
+    cursor: pointer;
+  }
+
+  span + span {
+    margin-right: 0;
+  }
+`;

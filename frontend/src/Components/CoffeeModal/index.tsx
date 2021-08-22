@@ -1,8 +1,9 @@
 import React from "react";
 
 import { CgClose } from "react-icons/cg";
-import { Coffee } from "../../Context/coffeeContext";
+import { Coffee, useCoffeeContext } from "../../Context/coffeeContext";
 
+import { MdModeEdit, MdDelete } from "react-icons/md";
 import * as S from "./styles";
 
 interface CoffeeModalProps {
@@ -14,6 +15,8 @@ export const CoffeeModal: React.FC<CoffeeModalProps> = ({
   onClose,
   coffee,
 }) => {
+  const { deleteCoffee } = useCoffeeContext();
+
   return (
     <S.Container>
       <S.Board>
@@ -24,6 +27,14 @@ export const CoffeeModal: React.FC<CoffeeModalProps> = ({
           </span>
         </S.BoadHeader>
         <S.BoardDescription>{coffee.description}</S.BoardDescription>
+        <S.Footer>
+          <span className="edit">
+            <MdModeEdit size={30} />
+          </span>
+          <span className="delete" onClick={() => deleteCoffee(coffee.id)}>
+            <MdDelete size={30} />
+          </span>
+        </S.Footer>
       </S.Board>
     </S.Container>
   );

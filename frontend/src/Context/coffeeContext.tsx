@@ -10,6 +10,7 @@ interface CoffeeContextProps {
   coffees: Coffee[];
   isLoading: boolean;
   error?: string;
+  deleteCoffee: (id: string) => Promise<void>;
 }
 
 const CoffeeContext = createContext<CoffeeContextProps>(
@@ -40,8 +41,22 @@ export const CoffeeContextProvider = ({
     })();
   }, []);
 
+  const deleteCoffee = async (id: string) => {
+    try {
+      const response = await api.delete(`/coffee/${id}`);
+
+      if (response.status !== 200) {
+        setError("Something went wrong");
+      } else {
+        setCoffees((c) => c.filter((item) => item.id !== id));
+      }
+    } catch (e) {
+      setError(e.message);
+    }
+  };
+
   return (
-    <CoffeeContext.Provider value={{ coffees, isLoading, error }}>
+    <CoffeeContext.Provider value={{ coffees, isLoading, error, deleteCoffee }}>
       {children}
     </CoffeeContext.Provider>
   );
