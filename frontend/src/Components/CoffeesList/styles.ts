@@ -2,6 +2,4 @@ import styled from "styled-components";
 
 export const Container = styled.main`
   flex: 3;
-
-  background-color: red;
 `;
