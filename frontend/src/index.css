@@ -20,4 +20,6 @@ code {
   padding: 0;
   box-sizing: border-box;
   outline: none;
+
+  transition: all 0.4s;
 }

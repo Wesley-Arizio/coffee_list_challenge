@@ -6,6 +6,17 @@ export const Container = styled.main`
   background-color: #3c64b1;
   padding: 20px 20px;
   border: none;
+
+  position: relative;
+
+  &.active {
+    left: 0;
+  }
+
+  &.hidden {
+    left: -100%;
+    flex: 0;
+  }
 `;
 
 export const Form = styled.form`
@@ -25,6 +36,10 @@ export const Title = styled.h1`
   letter-spacing: 0.3px;
   color: #fff;
   transition: 0.4s;
+
+  @media (max-width: 1280px) {
+    font-size: 16px;
+  }
 `;
 
 export const Input = styled.input`
@@ -72,7 +87,7 @@ export const InputSubmit = styled.input`
 
   position: absolute;
 
-  bottom: 60px;
+  bottom: 110px;
   right: 0;
   cursor: pointer;
 `;

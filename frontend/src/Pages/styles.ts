@@ -8,3 +8,33 @@ export const ContainerHomePage = styled.div`
   display: flex;
   flex-direction: row;
 `;
+
+export const FixedTopBar = styled.div`
+  width: 100vw;
+  height: 50px;
+  background-color: #3c64b1;
+
+  font-family: Mulish;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 24px;
+  text-align: center;
+  letter-spacing: 0.3px;
+  color: #fff;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  position: relative;
+
+  & span {
+    position: absolute;
+    left: 20px;
+    cursor: pointer;
+  }
+
+  @media (max-width: 1280px) {
+    font-size: 16px;
+  }
+`;

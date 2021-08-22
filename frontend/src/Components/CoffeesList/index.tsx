@@ -3,9 +3,13 @@ import { CoffeeCard } from "../CoffeeCard";
 
 import * as S from "./styles";
 
-export const CoffeesList: React.FC = () => {
+interface CoffeeListProps {
+  isSideBarOpen: boolean;
+}
+
+export const CoffeesList: React.FC<CoffeeListProps> = ({ isSideBarOpen }) => {
   return (
-    <S.Container>
+    <S.Container isSideBarOpen={isSideBarOpen}>
       <CoffeeCard />
       <CoffeeCard />
       <CoffeeCard />

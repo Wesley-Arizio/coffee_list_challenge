@@ -16,6 +16,12 @@ export const Container = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+
+  @media (max-width: 1280px) {
+    padding: 20px;
+    overflow: scroll;
+    display: block;
+  }
 `;
 
 export const Board = styled.main`
@@ -28,6 +34,10 @@ export const Board = styled.main`
   border-radius: 30px;
 
   padding: 30px;
+
+  @media (max-width: 1280px) {
+    width: 100%;
+  }
 `;
 
 export const BoadHeader = styled.header`
