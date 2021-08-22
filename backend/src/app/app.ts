@@ -1,5 +1,6 @@
 import express, { Express } from "express";
 import { Knex } from "knex";
+import cors from "cors";
 
 import { Routes } from "./routes";
 
@@ -11,6 +12,11 @@ export default class App {
   constructor(connection: Knex) {
     this.app = express();
     this.app.use(express.json());
+    this.app.use(
+      cors({
+        origin: "*",
+      })
+    );
 
     this.connection = connection;
   }
