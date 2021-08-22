@@ -3,6 +3,7 @@ import { Knex } from "knex";
 import { GetCoffeeController } from "../controller/GetCoffee";
 import { GetCoffeeListController } from "../controller/GetCoffeeList";
 import { SaveCoffeeController } from "../controller/SaveCoffee";
+import { UpdateCoffeeController } from "../controller/UpdateCoffee";
 
 export class Routes {
   private db: Knex;
@@ -29,7 +30,7 @@ export class Routes {
     );
 
     this.routes.patch("/coffee/:id", (request, response) =>
-      response.status(200).send()
+      UpdateCoffeeController(request, response, this.db)
     );
 
     this.routes.delete("/coffee/:id", (request, response) =>
