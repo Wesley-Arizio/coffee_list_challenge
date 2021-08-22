@@ -41,4 +41,10 @@ export class CoffeeRepository {
 
     return coffeeUpdated;
   }
+
+  async deleteCoffee({ id }: { id: string }): Promise<number> {
+    const deleted = await this.db("coffee").delete().where("id", id);
+
+    return deleted;
+  }
 }

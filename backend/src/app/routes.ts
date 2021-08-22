@@ -1,5 +1,6 @@
 import { Router } from "express";
 import { Knex } from "knex";
+import { DeleteCoffeeController } from "../controller/DeleteCoffee";
 import { GetCoffeeController } from "../controller/GetCoffee";
 import { GetCoffeeListController } from "../controller/GetCoffeeList";
 import { SaveCoffeeController } from "../controller/SaveCoffee";
@@ -34,7 +35,7 @@ export class Routes {
     );
 
     this.routes.delete("/coffee/:id", (request, response) =>
-      response.status(200).send()
+      DeleteCoffeeController(request, response, this.db)
     );
   }
 }
