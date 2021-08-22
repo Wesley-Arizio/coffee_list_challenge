@@ -1,12 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 
-import { CgClose } from "react-icons/cg";
-import { Coffee, useCoffeeContext } from "../../Context/coffeeContext";
+import { Coffee } from "../../Context/coffeeContext";
+import { ModalEdit } from "./ModalEdit";
+import { ModalView } from "./ModalView";
 
-import { MdModeEdit, MdDelete } from "react-icons/md";
 import * as S from "./styles";
 
-interface CoffeeModalProps {
+type CoffeeModalType = "view" | "edit";
+
+export interface CoffeeModalProps {
   onClose: () => void;
   coffee: Coffee;
 }
@@ -15,26 +17,24 @@ export const CoffeeModal: React.FC<CoffeeModalProps> = ({
   onClose,
   coffee,
 }) => {
-  const { deleteCoffee } = useCoffeeContext();
+  const [modalType, setModalType] = useState<CoffeeModalType>("view");
+
+  const handleChangeToEditView = () => {
+    setModalType("edit");
+  };
 
   return (
     <S.Container>
       <S.Board>
-        <S.BoadHeader>
-          <S.Title>{coffee.name}</S.Title>
-          <span onClick={() => onClose()}>
-            <CgClose size={30} />
-          </span>
-        </S.BoadHeader>
-        <S.BoardDescription>{coffee.description}</S.BoardDescription>
-        <S.Footer>
-          <span className="edit">
-            <MdModeEdit size={30} />
-          </span>
-          <span className="delete" onClick={() => deleteCoffee(coffee.id)}>
-            <MdDelete size={30} />
-          </span>
-        </S.Footer>
+        {modalType === "view" ? (
+          <ModalView
+            coffee={coffee}
+            onClose={onClose}
+            handleChangeToEditView={handleChangeToEditView}
+          />
+        ) : (
+          <ModalEdit coffee={coffee} onClose={onClose} />
+        )}
       </S.Board>
     </S.Container>
   );

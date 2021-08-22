@@ -11,6 +11,7 @@ interface CoffeeContextProps {
   isLoading: boolean;
   error?: string;
   deleteCoffee: (id: string) => Promise<void>;
+  updateCoffee: (coffee: Coffee) => Promise<void>;
 }
 
 const CoffeeContext = createContext<CoffeeContextProps>(
@@ -55,8 +56,28 @@ export const CoffeeContextProvider = ({
     }
   };
 
+  const updateCoffee = async (coffee: Coffee): Promise<void> => {
+    try {
+      const response = await api.patch(`/coffee/${coffee.id}`, {
+        name: coffee.name,
+        description: coffee.description,
+      });
+
+      if (response.status !== 200) {
+        setError("Something went wrong");
+      } else {
+        const otherCoffees = coffees.filter((item) => item.id !== coffee.id);
+        setCoffees([...otherCoffees, response.data.data]);
+      }
+    } catch (e) {
+      setError(e.message);
+    }
+  };
+
   return (
-    <CoffeeContext.Provider value={{ coffees, isLoading, error, deleteCoffee }}>
+    <CoffeeContext.Provider
+      value={{ coffees, isLoading, error, deleteCoffee, updateCoffee }}
+    >
       {children}
     </CoffeeContext.Provider>
   );
