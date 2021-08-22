@@ -1,6 +1,7 @@
 import { Knex } from "knex";
 import { Coffee } from "../../../Entity/coffee";
-import { SaveCoffeeControllerArgs } from "../../SaveCoffee/service/SaveCoffeeService";
+import { SaveCoffeeArgs } from "../../SaveCoffee/service/SaveCoffeeService";
+import { UpdateCoffeeArgs } from "../../UpdateCoffee/service/UpdateCoffeeService";
 
 export class CoffeeRepository {
   private db: Knex;
@@ -9,7 +10,7 @@ export class CoffeeRepository {
     this.db = db;
   }
 
-  async save({ name, description }: SaveCoffeeControllerArgs): Promise<Coffee> {
+  async save({ name, description }: SaveCoffeeArgs): Promise<Coffee> {
     const [response] = await this.db("coffee")
       .insert({ name, description })
       .returning("*");
@@ -27,5 +28,17 @@ export class CoffeeRepository {
     const [coffee] = await this.db("coffee").select("*").where("id", id);
 
     return coffee;
+  }
+
+  async updateCoffee({
+    id,
+    ...fieldsToUpdate
+  }: UpdateCoffeeArgs): Promise<Coffee> {
+    const [coffeeUpdated] = await this.db("coffee")
+      .update(fieldsToUpdate)
+      .where("id", id)
+      .returning("*");
+
+    return coffeeUpdated;
   }
 }

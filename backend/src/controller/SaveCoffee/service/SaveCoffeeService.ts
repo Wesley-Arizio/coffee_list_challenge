@@ -5,7 +5,7 @@ import {
 } from "../../../util/serviceWrapperResponse";
 import { CoffeeRepository } from "../../repository/CoffeeRepository/CoffeeRepository";
 
-export interface SaveCoffeeControllerArgs {
+export interface SaveCoffeeArgs {
   name: string;
   description: string;
 }
@@ -19,7 +19,7 @@ export class SaveCoffeeService {
   async execute({
     name,
     description,
-  }: SaveCoffeeControllerArgs): Promise<WrapperServiceResponse> {
+  }: SaveCoffeeArgs): Promise<WrapperServiceResponse> {
     const coffee = await this.repository.save({ name, description });
 
     if (!coffee) {
