@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { api } from "../api";
 
-interface Coffee {
+export interface Coffee {
   id: string;
   name: string;
   description: string;

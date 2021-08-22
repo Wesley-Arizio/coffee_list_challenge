@@ -21,7 +21,7 @@ export const CoffeesList: React.FC<CoffeeListProps> = ({ isSideBarOpen }) => {
   return (
     <S.Container isSideBarOpen={isSideBarOpen}>
       {coffees.map((item) => (
-        <CoffeeCard name={item.name} key={item.id} id={item.id} />
+        <CoffeeCard key={item.id} coffee={item} />
       ))}
     </S.Container>
   );
