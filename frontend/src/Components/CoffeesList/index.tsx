@@ -1,4 +1,5 @@
 import React from "react";
+import { useCoffeeContext } from "../../Context/coffeeContext";
 import { CoffeeCard } from "../CoffeeCard";
 
 import * as S from "./styles";
@@ -8,20 +9,20 @@ interface CoffeeListProps {
 }
 
 export const CoffeesList: React.FC<CoffeeListProps> = ({ isSideBarOpen }) => {
+  const { isLoading, error, coffees } = useCoffeeContext();
+
+  if (isLoading) {
+    return <div>Loading..</div>;
+  }
+
+  if (error) {
+    return <div>{error}</div>;
+  }
   return (
     <S.Container isSideBarOpen={isSideBarOpen}>
-      <CoffeeCard />
-      <CoffeeCard />
-      <CoffeeCard />
-      <CoffeeCard />
-      <CoffeeCard />
-      <CoffeeCard />
-      <CoffeeCard />
-      <CoffeeCard />
-      <CoffeeCard />
-      <CoffeeCard />
-      <CoffeeCard />
-      <CoffeeCard />
+      {coffees.map((item) => (
+        <CoffeeCard name={item.name} key={item.id} id={item.id} />
+      ))}
     </S.Container>
   );
 };

@@ -3,7 +3,12 @@ import { CoffeeModal } from "../CoffeeModal";
 
 import * as S from "./styles";
 
-export const CoffeeCard: React.FC = () => {
+interface CoffeeCardProps {
+  id: string;
+  name: string;
+}
+
+export const CoffeeCard: React.FC<CoffeeCardProps> = ({ name }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleModal = (): void => {
@@ -15,7 +20,7 @@ export const CoffeeCard: React.FC = () => {
       <S.Container onClick={() => handleModal()}>
         <S.CoffeeImagePreview src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQrqSeLYrRmuDySyBVIgsv8ejAfTt0b4BqF3w&usqp=CAU" />
         <S.ContainerTitle>
-          <S.Title>Coffee</S.Title>
+          <S.Title>{name}</S.Title>
         </S.ContainerTitle>
       </S.Container>
 
