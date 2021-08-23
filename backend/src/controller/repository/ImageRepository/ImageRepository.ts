@@ -28,4 +28,12 @@ export class ImageRepository {
 
     return response;
   }
+
+  async getImages(coffeeId: string): Promise<any[]> {
+    const images = await this.db("preview_image")
+      .select("*")
+      .where("coffee_id", coffeeId);
+
+    return images;
+  }
 }
