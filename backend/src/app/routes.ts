@@ -4,6 +4,7 @@ import { DeleteCoffeeController } from "../controller/DeleteCoffee";
 import { GetCoffeeController } from "../controller/GetCoffee";
 import { GetCoffeeListController } from "../controller/GetCoffeeList";
 import { SaveCoffeeController } from "../controller/SaveCoffee";
+import { SaveImageController } from "../controller/SaveImage";
 import { UpdateCoffeeController } from "../controller/UpdateCoffee";
 
 export class Routes {
@@ -36,6 +37,10 @@ export class Routes {
 
     this.routes.delete("/coffee/:id", (request, response) =>
       DeleteCoffeeController(request, response, this.db)
+    );
+
+    this.routes.post("/upload/:coffeeId", (request, response) =>
+      SaveImageController(request, response, this.db)
     );
   }
 }
